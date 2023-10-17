@@ -101,27 +101,16 @@ module openframe_project_wrapper (
     input  [`OPENFRAME_IO_PADS-1:0] gpio_loopback_zero
 );
 
-	picosoc openframe_example (
+	user_proj_timer mprj (
 `ifdef USE_POWER_PINS
-		.VPWR(vccd1),
-		.VGND(vssd1),
+		.vccd1(vccd1),
+		.vssd1(vssd1),
 `endif
-	    .porb(porb_l),
-	    .por(por_l),
-	    .resetb(resetb_l),
-	    .mask_rev(mask_rev),
-	    .gpio_in(gpio_in),
-	    .gpio_out(gpio_out),
-	    .gpio_oeb(gpio_oeb),
-	    .gpio_ieb(gpio_inp_dis),
-	    .gpio_ib_mode_sel(gpio_ib_mode_sel),
-	    .gpio_vtrip_sel(gpio_vtrip_sel),
-	    .gpio_slow_sel(gpio_slow_sel),
-	    .gpio_dm2(gpio_dm2),
-	    .gpio_dm1(gpio_dm1),
-	    .gpio_dm0(gpio_dm0),
-	    .gpio_loopback_one(gpio_loopback_one),
-	    .gpio_loopback_zero(gpio_loopback_zero)
+        .wb_clk_i(gpio_in[0]),
+        .wb_rst_i(gpio_in[1]),
+        .io_in(gpio_in[12:2]),
+        .io_out(gpio_out[12:2]),
+        .io_oeb(gpio_oeb[12:2])
 
 	    /* NOTE:  Openframe signals not used in picosoc:	*/
 	    /* porb_h:    3.3V domain signal			*/
