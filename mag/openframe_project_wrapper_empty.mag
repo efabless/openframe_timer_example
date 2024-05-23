@@ -1520,7 +1520,7 @@ port 58 nsew
 flabel metal2 s 607770 -400 607822 56 0 FreeSans 400 90 0 0 mask_rev[12]
 port 57 nsew
 flabel metal2 s 607994 -400 608046 56 0 FreeSans 400 90 0 0 mask_rev[13]
-port 60 nsew
+port 56 nsew
 flabel metal2 s 608218 -400 608270 56 0 FreeSans 400 90 0 0 mask_rev[14]
 port 55 nsew
 flabel metal2 s 608442 -400 608494 56 0 FreeSans 400 90 0 0 mask_rev[15]
