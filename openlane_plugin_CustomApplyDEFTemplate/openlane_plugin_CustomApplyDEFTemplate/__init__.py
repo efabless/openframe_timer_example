@@ -4,6 +4,7 @@ from openlane.steps.odb import ApplyDEFTemplate
 from .__version__ import __version__
 from typing import List, Optional
 from openlane.config import Variable
+from openlane.common import get_script_dir
 
 
 @Step.factory.register()
@@ -24,8 +25,15 @@ class CustomApplyDEFTemplate(ApplyDEFTemplate):
         ),
     ]
 
+    def run(self, state_in, **kwargs):
+        kwargs, env = self.extract_env(kwargs)
+        env["PYTHONPATH"] = os.path.join(get_script_dir(), "odbpy")
+        return super().run(state_in, env=env, **kwargs)
+
     def get_script_path(self):
-        return os.path.join(os.path.dirname(os.path.abspath(__file__)), "apply_def_template.py")
+        return os.path.join(
+            os.path.dirname(os.path.abspath(__file__)), "apply_def_template.py"
+        )
 
     def get_command(self) -> List[str]:
         template_args = []

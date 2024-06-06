@@ -18,7 +18,7 @@ import os
 import re
 import sys
 
-from openlane.scripts.odbpy.reader import OdbReader, click_odb, click
+from reader import OdbReader, click_odb, click
 
 
 @click.group()
@@ -229,7 +229,6 @@ def relocate_pins(db, input_lefs, template_def, template_def_pins):
         name = output_bterm.getName()
 
         if name in template_bterm_locations and name in template_def_pins:
-
             for template_bterm_location_tuple in template_bterm_locations[name]:
                 layer = output_tech.findLayer(template_bterm_location_tuple[0])
 
@@ -289,7 +288,9 @@ def relocate_pins(db, input_lefs, template_def, template_def_pins):
                 output_new_bpin.setPlacementStatus("PLACED")
                 output_new_bpin.getBTerm().setSigType(template_bterm_location_tuple[5])
                 output_new_bpin.getBTerm().getNet().setSpecial()
-                output_new_bpin.getBTerm().getNet().setSigType(template_bterm_location_tuple[5])
+                output_new_bpin.getBTerm().getNet().setSigType(
+                    template_bterm_location_tuple[5]
+                )
         else:
             print(
                 f"{name} not found in donor def, but found in output def. Leaving as-is.",
@@ -469,6 +470,26 @@ def add_obstructions(obstructions, reader):
 
 
 cli.add_command(add_obstructions)
+
+
+def get_die_area(def_file, input_lefs):
+    die_area_dbu = (-1, -1, -1, -1)
+    db = odb.dbDatabase.create()
+    for lef in input_lefs:
+        odb.read_lef(db, lef)
+    odb.read_def(db.getTech(), def_file)
+    die_area = db.getChip().getBlock().getDieArea()
+    if die_area:
+        dbu = db.getChip().getBlock().getDefUnits()
+        die_area_dbu = (
+            die_area.xMin() / dbu,
+            die_area.yMin() / dbu,
+            die_area.xMax() / dbu,
+            die_area.yMax() / dbu,
+        )
+
+    return die_area_dbu
+
 
 if __name__ == "__main__":
     cli()

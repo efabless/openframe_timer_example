@@ -1,6 +1,6 @@
 {
     "meta": {
-        "version": 2,
+        "version": 1,
         "flow": [
             "Yosys.JsonHeader",
             "Yosys.Synthesis",
@@ -33,9 +33,7 @@
         ]
     },
     "DESIGN_NAME": "openframe_project_wrapper",
-    "VERILOG_DEFINES": [
-        "PnR"
-    ],
+    "VERILOG_DEFINES": ["PnR"],
     "VERILOG_FILES": [
         "dir::/../../verilog/rtl/openframe_project_netlists.v",
         "dir::/../../verilog/rtl/openframe_project_wrapper.v"
@@ -45,75 +43,46 @@
     "DRT_THREADS": 16,
     "CLOCK_PERIOD": 25,
     "CLOCK_PORT": "gpio_in[0]",
-    "PDN_MACRO_CONNECTIONS": [
-        "mprj vccd1 vssd1 vccd1 vssd1"
-    ],
+    "PDN_MACRO_CONNECTIONS": ["mprj vccd1 vssd1 vccd1 vssd1"],
     "MAGIC_DEF_LABELS": false,
     "MACROS": {
         "mprj": {
-            "gds": [
-                "dir::/../../gds/user_proj_timer.gds"
-            ],
-            "lef": [
-                "dir::/../../lef/user_proj_timer.lef"
-            ],
+            "gds": ["dir::/../../gds/user_proj_timer.gds"],
+            "lef": ["dir::/../../lef/user_proj_timer.lef"],
             "instances": {
                 "mprj": {
-                    "location": [
-                        2850,
-                        235
-                    ],
+                    "location": [2850, 235],
                     "orientation": "FN"
                 }
             },
-            "nl": [
-                "dir::/../../verilog/gl/user_proj_timer.v"
-            ]
+            "nl": ["dir::/../../verilog/gl/user_proj_timer.v"]
         },
         "vccd1_connection": {
-            "gds": [
-                "dir::/../../gds/vccd1_connection.gds"
-            ],
-            "lef": [
-                "dir::/../../lef/vccd1_connection.lef"
-            ],
+            "gds": ["dir::/../../gds/vccd1_connection.gds"],
+            "lef": ["dir::/../../lef/vccd1_connection.lef"],
             "instances": {
                 "vccd1_connection": {
-                    "location": [
-                        3122.515,
-                        4327.515
-                    ],
+                    "location": [3122.515, 4327.515],
                     "orientation": "N"
                 }
             },
-            "nl": [
-                "dir::/../../verilog/gl/vccd1_connection.v"
-            ]
+            "nl": ["dir::/../../verilog/gl/vccd1_connection.v"]
         },
         "vssd1_connection": {
-            "gds": [
-                "dir::/../../gds/vssd1_connection.gds"
-            ],
-            "lef": [
-                "dir::/../../lef/vssd1_connection.lef"
-            ],
+            "gds": ["dir::/../../gds/vssd1_connection.gds"],
+            "lef": ["dir::/../../lef/vssd1_connection.lef"],
             "instances": {
                 "vssd1_connection": {
-                    "location": [
-                        3122.515,
-                        2088.515
-                    ],
+                    "location": [3122.515, 2088.515],
                     "orientation": "N"
                 }
             },
-            "nl": [
-                "dir::/../../verilog/gl/vssd1_connection.v"
-            ]
+            "nl": ["dir::/../../verilog/gl/vssd1_connection.v"]
         }
     },
-    "CLOCK_UNCERTAINTY_CONSTRAINT": 0.800,
+    "CLOCK_UNCERTAINTY_CONSTRAINT": 0.8,
     "PL_TARGET_DENSITY_PCT": 28,
-    "MAX_TRANSITION_CONSTRAINT": 0.750,
+    "MAX_TRANSITION_CONSTRAINT": 0.75,
     "MAX_FANOUT_CONSTRAINT": 16,
     "DESIGN_REPAIR_MAX_WIRE_LENGTH": 800,
     "CTS_CLK_MAX_WIRE_LENGTH": 800,
@@ -144,12 +113,8 @@
     "FP_PDN_HWIDTH": 3.2,
     "FP_PDN_HSPACING": 26.8,
     "FP_PDN_VSPACING": 26.8,
-    "VDD_NETS": [
-        "vccd1"
-    ],
-    "GND_NETS": [
-        "vssd1"
-    ],
+    "VDD_NETS": ["vccd1"],
+    "GND_NETS": ["vssd1"],
     "FP_TEMPLATE_PINS": [
         "vccd1",
         "vssd1",
