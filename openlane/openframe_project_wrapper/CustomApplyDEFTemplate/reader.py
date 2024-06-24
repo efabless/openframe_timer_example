@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 import odb
+from openroad import Tech, Design
+from typing import ClassVar, Optional
 
 import os
 import sys
@@ -22,8 +24,17 @@ import click
 
 
 class OdbReader(object):
+    primary_reader: ClassVar[Optional["OdbReader"]] = None
+
     def __init__(self, *args):
-        self.db = odb.dbDatabase.create()
+        if primary := OdbReader.primary_reader:
+            self.db = odb.dbDatabase.create()
+            self.db.setLogger(primary.design.getLogger())
+        else:
+            self.ord_tech = Tech()
+            self.design = Design(self.ord_tech)
+            self.db = self.ord_tech.getDB()
+
         if len(args) == 1:
             db_in = args[0]
             self.db = odb.read_db(self.db, db_in)
@@ -44,6 +55,9 @@ class OdbReader(object):
             self.rows = self.block.getRows()
             self.dbunits = self.block.getDefUnits()
             self.instances = self.block.getInsts()
+
+        if OdbReader.primary_reader is None:
+            OdbReader.primary_reader = self
 
     def add_lef(self, new_lef):
         odb.read_lef(self.db, new_lef)
@@ -77,6 +91,7 @@ def click_odb(function):
 
         if output_def is not None:
             odb.write_def(reader.block, output_def)
+        sys.stdout.flush()
         odb.write_db(reader.db, output)
 
     wrapper = click.option(
