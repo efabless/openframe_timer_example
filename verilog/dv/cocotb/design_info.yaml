@@ -1,0 +1,9 @@
+CARAVEL_ROOT: /home/rady/caravel_proj/Cheetah_V4_gl/dependencies/caravel
+MCW_ROOT: /home/rady/caravel_proj/openframe_timer_example/
+PDK: sky130A
+PDK_ROOT: /home/rady/caravel/files4vcs/pdk
+USER_PROJECT_ROOT: /home/rady/caravel_proj/openframe_timer_example/
+caravan: false
+clk: 25
+emailto:
+- null
